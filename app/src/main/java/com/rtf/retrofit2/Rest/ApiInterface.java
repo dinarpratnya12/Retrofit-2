@@ -1,8 +1,8 @@
 package com.rtf.retrofit2.Rest;
 
 import com.rtf.retrofit2.Model.ResultPembeli;
-import com.rtf.retrofit2.Model.GetPembelian;
-import com.rtf.retrofit2.Model.PostPutDelPembelian;
+import com.rtf.retrofit2.Model.Pembeli;
+import com.rtf.retrofit2.PutDelPembeliActivity;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -18,19 +18,19 @@ import retrofit2.http.Part;
 
 public interface ApiInterface {
     @GET("pembelian/user")
-    Call<GetPembelian> getPembelian();
+    Call<Pembeli> getPembelian();
 
     @FormUrlEncoded
     @POST("pembelian/user")
-    Call<PostPutDelPembelian> postPembelian(@Field("id_pembelian") String idPembelian, @Field("id_pembeli") String idPembeli, @Field("tanggal_beli") String tanggalBeli, @Field("total_harga") String totalHarga, @Field("id_tiket") String idTiket);
+    Call<PutDelPembeliActivity> postPembelian(@Field("id_pembelian") String idPembelian, @Field("id_pembeli") String idPembeli, @Field("tanggal_beli") String tanggalBeli, @Field("total_harga") String totalHarga, @Field("id_tiket") String idTiket);
 
     @FormUrlEncoded
     @PUT("pembelian/user")
-    Call<PostPutDelPembelian> putPembelian(@Field("id_pembelian") String idPembelian, @Field("id_pembeli") String idPembeli, @Field("tanggal_beli") String tanggalBeli, @Field("total_harga") String totalHarga, @Field("id_tiket") String idTiket);
+    Call<PutDelPembeliActivity> putPembelian(@Field("id_pembelian") String idPembelian, @Field("id_pembeli") String idPembeli, @Field("tanggal_beli") String tanggalBeli, @Field("total_harga") String totalHarga, @Field("id_tiket") String idTiket);
 
     @FormUrlEncoded
     @HTTP(method = "DELETE", path = "pembelian/user", hasBody = true)
-    Call<PostPutDelPembelian> deletePembelian(@Field("id_pembelian") String idPembelian);
+    Call<PutDelPembeliActivity> deletePembelian(@Field("id_pembelian") String idPembelian);
 
     @GET("pembeli/user")
     Call<ResultPembeli> getPembeli();

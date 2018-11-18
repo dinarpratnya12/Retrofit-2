@@ -1,13 +1,15 @@
 <?
 require APPPATH . '/libraries/REST_Controller.php';
 class pembeli extends REST_Controller {
-//$this->response(array("status"=>"success","result" => $get_pembeli)); //$this->response(array("status"=>"success"));
+    //$this->response(array("status"=>"success","result" => $get_pembeli)); //$this->response(array("status"=>"success"));
+    
     function user_get(){
         $get_pembeli = $this->db->query("SELECT p.id_pembeli, p.nama, p.alamat, p.telpn, p.photo_id FROM pembeli as p")->result();
         $this->response(array("status"=>"success","result" => $get_pembeli));
     }
         function user_post() {
-            $action = $this->post('action'); $data_pembeli = array('id_pembeli' => $this->post('id_pembeli'), 'nama' => $this->post('nama'), 'alamat' => $this->post('alamat'), 'telpn' => $this->post('telpn'), 'photo_id' => $this->post('photo_id'));
+            $action = $this->post('action');
+            $data_pembeli = array('id_pembeli' => $this->post('id_pembeli'), 'nama' => $this->post('nama'), 'alamat' => $this->post('alamat'), 'telpn' => $this->post('telpn'), 'photo_id' => $this->post('photo_id'));
             if ($action==='post'){
                 $this->insertPembeli($data_pembeli);
             }else if ($action==='put'){
@@ -21,14 +23,16 @@ class pembeli extends REST_Controller {
         }
         function insertPembeli($data_pembeli){
             //function upload image
-                $uploaddir = str_replace("application/", "", APPPATH).'upload/'; if(!file_exists($uploaddir) && !is_dir($uploaddir)) {
+                $uploaddir = str_replace("application/", "", APPPATH).'upload/';
+                if(!file_exists($uploaddir) && !is_dir($uploaddir)) {
                     echo mkdir($uploaddir, 0750, true);
                 }
                 if (!empty($_FILES)){
                     $path = $_FILES['photo_id']['name'];
                     $ext = pathinfo($path, PATHINFO_EXTENSION);
                     // $user_img = time() . rand() . '.' . $ext;
-                    $user_img = $data_pembeli['id_pembeli']. '.' . "png"; $uploadfile = $uploaddir . $user_img;
+                    $user_img = $data_pembeli['id_pembeli']. '.' . "png";
+                    $uploadfile = $uploaddir . $user_img;
                     $data_pembeli['photo_id'] = "upload/".$user_img;
                 }else{
                     $data_pembeli['photo_id']="";
@@ -117,11 +121,13 @@ class pembeli extends REST_Controller {
                         $getPhotoPath =$this->db->query("SELECT photo_id FROM pembeli Where id_pembeli='".$data_pembeli['id_pembeli']."'")->result();
                         if(!empty($getPhotoPath)){
                             foreach ($getPhotoPath as $row) {
-                                $user_img = $row->photo_id; $data_pembeli['photo_id'] = base_url().$user_img;
+                                $user_img = $row->photo_id;
+                                $data_pembeli['photo_id'] = base_url().$user_img;
                             }
                         }
                     }
-                    if ($update){ $this->response(array('status'=>'success','result' => array($data_pembeli),"message"=>$update));
+                    if ($update){
+                        $this->response(array('status'=>'success','result' => array($data_pembeli),"message"=>$update));
                     }
                 }
             }

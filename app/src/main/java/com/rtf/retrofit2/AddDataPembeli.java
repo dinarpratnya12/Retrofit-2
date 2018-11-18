@@ -86,6 +86,14 @@ public class AddDataPembeli extends AppCompatActivity {
             }
         });
 
+        btAddData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, AddDataPembeli.class);
+                startActivity(intent);
+            }
+        });
+
         btAddBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

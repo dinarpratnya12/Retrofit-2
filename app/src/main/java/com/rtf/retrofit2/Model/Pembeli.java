@@ -14,6 +14,7 @@ public class Pembeli {
     private String telpn;
     @SerializedName("photo_id")
     private String photoId; private String action;
+
     public Pembeli() {
 
     }

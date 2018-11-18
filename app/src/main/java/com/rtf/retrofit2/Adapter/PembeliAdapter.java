@@ -18,6 +18,7 @@ import com.squareup.picasso.Picasso;
 public class PembeliAdapter extends RecyclerView.Adapter<PembeliAdapter.PembViewHolder> {
     List<Pembeli> listPembeli;
     public PembeliAdapter(List<Pembeli> listPembeli) {
+
         this.listPembeli = listPembeli;
     }
     @Override
@@ -42,11 +43,12 @@ public class PembeliAdapter extends RecyclerView.Adapter<PembeliAdapter.PembView
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), PutDelPembeliActivity.class);
 
-                intent.putExtra(“id_pembeli”,listPembeli.get(position).getIdPembeli());
-                intent.putExtra(“nama”,listPembeli.get(position).getNama());
-                intent.putExtra(“alamat”,listPembeli.get(position).getAlamat());
-                intent.putExtra(“telpn”,listPembeli.get(position).getTelpn());
-                intent.putExtra(“photo_id”,listPembeli.get(position).getPhotoId());
+
+                intent.putExtra("id_pembeli",listPembeli.get(position).getIdPembeli());
+                intent.putExtra("nama",listPembeli.get(position).getNama());
+                intent.putExtra("alamat",listPembeli.get(position).getAlamat());
+                intent.putExtra("telpn",listPembeli.get(position).getTelpn());
+                intent.putExtra("photo_id",listPembeli.get(position).getPhotoId());
                 view.getContext().startActivity(intent);
             }
         });
